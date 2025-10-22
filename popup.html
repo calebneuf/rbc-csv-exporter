@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RBC CSV Exporter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="icons/icon32.png" alt="RBC CSV Exporter" class="logo">
+      <h1>RBC CSV Exporter</h1>
+    </div>
+
+    <div class="status-section">
+      <div id="status-indicator" class="status-indicator">
+        <span class="status-dot"></span>
+        <span id="status-text">Checking page...</span>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div id="rbc-page-content" class="content-section" style="display: none;">
+        <p class="description">
+          Extract your RBC transactions and download them as a CSV file.
+        </p>
+        
+        <div id="live-counter-section" class="live-counter-section" style="display: none;">
+          <div class="counter-info">
+            <span class="counter-label">Transactions detected on page:</span>
+            <span id="live-transaction-count" class="counter-number">0</span>
+          </div>
+          <button id="refresh-count-btn" class="refresh-btn">
+            <span class="btn-icon">🔄</span>
+            Refresh Count
+          </button>
+        </div>
+
+        <div class="action-buttons">
+          <button id="extract-btn" class="primary-btn">
+            <span class="btn-icon">📊</span>
+            Extract Transactions
+          </button>
+          <button id="detect-pdfs-btn" class="secondary-btn" style="display: none;">
+            <span class="btn-icon">📄</span>
+            Detect PDFs
+          </button>
+        </div>
+
+        <div id="results-section" class="results-section" style="display: none;">
+          <div class="result-info">
+            <span id="transaction-count">0</span> transactions extracted
+          </div>
+          <button id="download-btn" class="secondary-btn" style="display: none;">
+            <span class="btn-icon">💾</span>
+            Download CSV
+          </button>
+        </div>
+
+        <div id="pdf-section" class="pdf-section" style="display: none;">
+          <h3>📄 PDF Statement Processing</h3>
+          <div id="pdf-list" class="pdf-list">
+            <!-- PDF links will be populated here -->
+          </div>
+          <div id="pdf-processing-status" class="pdf-processing-status" style="display: none;">
+            <div class="loading-spinner"></div>
+            <span id="pdf-status-text">Processing PDF...</span>
+          </div>
+        </div>
+
+        <div class="help-section">
+          <details>
+            <summary>How to use</summary>
+            <ol>
+              <li>Navigate to your RBC account transaction history</li>
+              <li><strong>Optional:</strong> Use the RBC date filter to set a date range (up to 7 years back for maximum history)</li>
+              <li>The extension will automatically click "Show More" to load all transactions in the current view</li>
+              <li>Click "Extract Transactions" to scan and collect all visible transactions</li>
+              <li>Click "Download CSV" to save your transaction data</li>
+            </ol>
+            <p class="help-tip">💡 <strong>Tip:</strong> For best results, set your date filter first, then wait for all transactions to load before extracting.</p>
+          </details>
+        </div>
+      </div>
+
+      <div id="non-rbc-page-content" class="content-section" style="display: none;">
+        <div class="warning-box">
+          <span class="warning-icon">⚠️</span>
+          <p>This extension only works on RBC banking pages.</p>
+          <p>Please navigate to your RBC online banking account first.</p>
+        </div>
+        
+        <div class="help-links">
+          <a href="https://www.rbcroyalbank.com" target="_blank" class="help-link">
+            Go to RBC Online Banking
+          </a>
+        </div>
+      </div>
+
+      <div id="loading-content" class="content-section">
+        <div class="loading-spinner"></div>
+        <p>Checking current page...</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="version">v1.0.0</div>
+    </div>
+  </div>
+
+  <script>
+    // Make popupController globally available for onclick handlers
+    let popupController;
+    document.addEventListener('DOMContentLoaded', () => {
+      popupController = new PopupController();
+    });
+  </script>
+  <script src="popup.js"></script>
+</body>
+</html>
