@@ -22,7 +22,15 @@
         "*://*.royalbank.com/*",
         "*://*.rbc.com/*"
       ],
-      "js": ["content.js"],
+      "js": [
+        "js/utils.js",
+        "js/pdfProcessor.js",
+        "js/csvExporter.js",
+        "js/transactionParser.js",
+        "js/uiManager.js",
+        "js/transactionExtractor.js",
+        "content.js"
+      ],
       "css": ["content.css"]
     }
   ],
